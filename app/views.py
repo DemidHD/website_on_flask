@@ -14,12 +14,11 @@ UPLOAD_FOLDER = BASEDIR / 'static' / 'images'
 @app.route('/')
 def index():
     movies = Movie.query.order_by(Movie.id.desc()).all()
-    return render_template('index.html',
-                           movies=movies)
+    return render_template('index.html', movies=movies)
 
 
 @app.route('/movie/<int:id>', methods=['GET', 'POST'])
-def movie(id):
+def movie_fn(id):
     movie = Movie.query.get(id)
     if movie.reviews:
         avg_score = round(sum(review.score for review in movie.reviews) / len(movie.reviews), 2)
@@ -56,15 +55,13 @@ def add_movie():
         db.session.add(movie)
         db.session.commit()
         return redirect(url_for('movie', id=movie.id))
-    return render_template('add_movie.html',
-                           form=form)
+    return render_template('add_movie.html', form=form)
 
 
 @app.route('/reviews')
 def reviews_func():
     reviews = Review.query.order_by(Review.created_date.desc()).all()
-    return render_template('reviews.html',
-                           reviews=reviews)
+    return render_template('reviews.html', reviews=reviews)
 
 
 @app.route('/delete_review/<int:id>')

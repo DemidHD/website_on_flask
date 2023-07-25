@@ -4,9 +4,7 @@ from . import db
 
 
 class Movie(db.Model):
-    """
-    Модель фильма
-    """
+    """Модель фильма"""
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(255), nullable=False)
@@ -19,9 +17,7 @@ class Movie(db.Model):
 
 
 class Review(db.Model):
-    """
-    Модель отзыва зрителя
-    """
+    """Модель отзыва зрителя"""
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable=False)
